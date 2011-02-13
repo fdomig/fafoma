@@ -44,157 +44,157 @@ use \Fafoma\Renderer\Renderer;
  */
 abstract class Element {
 
-	/**
-	 * @var string
-	 */
-	protected $name;
+    /**
+     * @var string
+     */
+    protected $name;
 
-	/**
-	 * @var string[]
-	 */
-	protected $attributes = array();
+    /**
+     * @var string[]
+     */
+    protected $attributes = array();
 
-	/**
-	 * @var string
-	 */
-	protected $label = '';
+    /**
+     * @var string
+     */
+    protected $label = '';
 
-	/**
-	 * @var mixed[]
-	 */
-	protected $data = null;
+    /**
+     * @var mixed[]
+     */
+    protected $data = null;
 
-	/**
-	 * @var mixed[]
-	 */
-	protected $filters = array();
+    /**
+     * @var mixed[]
+     */
+    protected $filters = array();
 
-	/**
-	 * Constructor
-	 *
-	 * @param string $name
-	 * @param string[] $attributes
-	 * @param mixed[] $data
-	 */
-	public function __construct($name = null, $attributes = array(), $data = null) {
-		$this->setAttributes($attributes);
-		$this->setName($name);
-		$this->data = $data;
-		if (!array_key_exists('id', $this->attributes)) {
-			$this->generateId();
-		}
-	}
+    /**
+     * Constructor
+     *
+     * @param string $name
+     * @param string[] $attributes
+     * @param mixed[] $data
+     */
+    public function __construct($name = null, $attributes = array(), $data = null) {
+        $this->setAttributes($attributes);
+        $this->setName($name);
+        $this->data = $data;
+        if (!array_key_exists('id', $this->attributes)) {
+            $this->generateId();
+        }
+    }
 
-	/**
-	 * @param string $name
-	 */
-	public function setName($name) {
-		$this->attributes['name'] = $name;
-	}
+    /**
+     * @param string $name
+     */
+    public function setName($name) {
+        $this->attributes['name'] = $name;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return $this->attributes['name'];
-	}
+    /**
+     * @return string
+     */
+    public function getName() {
+        return $this->attributes['name'];
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getId() {
-		return $this->attributes['id'];
-	}
+    /**
+     * @return string
+     */
+    public function getId() {
+        return $this->attributes['id'];
+    }
 
-	/**
-	 * Set a value to this element.
-	 *
-	 * @param mixed $value
-	 */
-	public function setValue($value) {
-		$this->attributes['value'] = $value;
-	}
-	
-	/**
-	 * Set a value which gets filtered.
-	 *
-	 * @param mixed $value
-	 */
-	public function setFilteredValue($value) {
-		foreach ($this->filters as $k => $v) {
-			// TODO: change to validator classes
-			$value = filter_var($value, $v['filter'], $v['options']);
-		}
-		$this->setValue($value);
-	}
-	
-	/**
-	 * Get the value of this element.
-	 *
-	 * @return string
-	 */
-	public function getValue() {
-		return $this->attributes['value'];
-	}
+    /**
+     * Set a value to this element.
+     *
+     * @param mixed $value
+     */
+    public function setValue($value) {
+        $this->attributes['value'] = $value;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getLabel() {
-		return $this->label;
-	}
+    /**
+     * Set a value which gets filtered.
+     *
+     * @param mixed $value
+     */
+    public function setFilteredValue($value) {
+        foreach ($this->filters as $k => $v) {
+            // TODO: change to validator classes
+            $value = filter_var($value, $v['filter'], $v['options']);
+        }
+        $this->setValue($value);
+    }
 
-	/**
-	 * Set the label of this element.
-	 * @param string $label
-	 */
-	public function setLabel($label) {
-		$this->label = $label;
-	}
+    /**
+     * Get the value of this element.
+     *
+     * @return string
+     */
+    public function getValue() {
+        return $this->attributes['value'];
+    }
 
-	/**
-	 * @param string $filter
-	 * @param array $options
-	 */
-	public function addFilter($filter, $options = null) {
-		$this->filters[] = array(
+    /**
+     * @return string
+     */
+    public function getLabel() {
+        return $this->label;
+    }
+
+    /**
+     * Set the label of this element.
+     * @param string $label
+     */
+    public function setLabel($label) {
+        $this->label = $label;
+    }
+
+    /**
+     * @param string $filter
+     * @param array $options
+     */
+    public function addFilter($filter, $options = null) {
+        $this->filters[] = array(
 			'filter' => $filter,
 			'options' => $options,
-		);
-	}
+        );
+    }
 
-	/**
-	 * @param \Fafoma\Renderer\Renderer $renderer
-	 * @return string
-	 */
-	abstract public function render(Renderer $renderer);
+    /**
+     * @param \Fafoma\Renderer\Renderer $renderer
+     * @return string
+     */
+    abstract public function render(Renderer $renderer);
 
-	/**
-	 * Validate this element
-	 * @return boolean
-	 */
-	abstract public function validate();
-	
-	/**
-	 * Export the elements value.
-	 *
-	 * @return string
-	 */
-	public function export() {
-		return $this->getValue();
-	}
+    /**
+     * Validate this element
+     * @return boolean
+     */
+    abstract public function validate();
 
-	/**
-	 * @param string[] $attributes
-	 */
-	protected function setAttributes(array $attributes) {
-		$this->attributes = $attributes;
-	}
+    /**
+     * Export the elements value.
+     *
+     * @return string
+     */
+    public function export() {
+        return $this->getValue();
+    }
 
-	/**
-	 * Generate a unique id for this element.
-	 */
-	private function generateId() {
-		$this->attributes['id'] = uniqid($this->getName() . '-');
-	}
+    /**
+     * @param string[] $attributes
+     */
+    protected function setAttributes(array $attributes) {
+        $this->attributes = $attributes;
+    }
+
+    /**
+     * Generate a unique id for this element.
+     */
+    private function generateId() {
+        $this->attributes['id'] = uniqid($this->getName() . '-');
+    }
 }

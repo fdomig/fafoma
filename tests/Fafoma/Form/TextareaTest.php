@@ -40,38 +40,36 @@ use Fafoma\Form\Textarea;
 use Fafoma\Renderer\Html;
 
 class TextareaTest extends \PHPUnit_Framework_TestCase {
-	
-	private $text;
-	
-	private $renderer;
-	
-	public function setUp() {
-		$this->text = new Textarea('description', array(
+
+    private $text;
+
+    private $renderer;
+
+    public function setUp() {
+        $this->text = new Textarea('description', array(
 			'class' => 'required',
 			'id' => '1337'
 		));
-		
 		$this->renderer = new Html();
-	}
+    }
 
-	/**
-	 * @covers Fafoma\Form\Textarea::render
-	 */
-	public function testRender() {
-		$this->assertEquals(
+    /**
+     * @covers Fafoma\Form\Textarea::render
+     */
+    public function testRender() {
+        $this->assertEquals(
 			'<textarea class="required" id="1337" name="description" cols="50" rows="10"></textarea>',
-			$this->text->render($this->renderer),
-			'->render() returns the textarea'
-		);
-	}
-	
-	/**
-	 * @covers Fafoma\Form\Textarea::getLabel
-	 */
-	public function testLabel() {
-		$this->text->setLabel('Description');
-		$this->assertEquals('Description', $this->text->getLabel(),
+        $this->text->render($this->renderer),
+			'->render() returns the textarea');
+    }
+
+    /**
+     * @covers Fafoma\Form\Textarea::getLabel
+     */
+    public function testLabel() {
+        $this->text->setLabel('Description');
+        $this->assertEquals('Description', $this->text->getLabel(),
 			'->getLabel() returns the label');
-	}
-	
+    }
+
 }

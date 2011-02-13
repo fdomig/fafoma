@@ -61,17 +61,18 @@ $renderer = new Fafoma\Renderer\Html();
 <title>Fafoma Example</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link rel="stylesheet" href="fafoma.css" />
-<script type="text/javscript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+<script type="text/javscript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
 <script type="text/javscript" src="fafoma.js"></script>
 </head>
 
 <body>
 <h1>Example fafoma form</h1>
 <?php
-	if ('POST' === $_SERVER['REQUEST_METHOD']) {
-		$mngr->bind($_POST);
-	}
-	echo $renderer->renderForm($mngr);
+if ('POST' === $_SERVER['REQUEST_METHOD']) {
+    $mngr->bind($_POST);
+}
+echo $renderer->renderForm($mngr);
 ?>
 </body>
 </html>

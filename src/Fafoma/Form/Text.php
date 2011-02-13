@@ -44,7 +44,7 @@ use \Fafoma\Renderer\Renderer;
  */
 class Text extends Element {
 
-	/**
+    /**
      * Constructor
      *
      * @param string $name
@@ -55,25 +55,25 @@ class Text extends Element {
         parent::__construct($name, $attributes, $data);
         $this->addFilter(FILTER_SANITIZE_STRING);
     }
-    
+
     /* (non-PHPdoc)
      * @see Fafoma\Form\Element::render()
      */
     public function render(Renderer $renderer) {
-		$str = '<input type="text"';
-		if (!empty($this->attributes)) {
-			foreach ($this->attributes as $k => $v) {
-				$str.= sprintf(' %s="%s"', $k, $v);
-			}
-		}
-		$str.=' />';
-		return $str;
+        $str = '<input type="text"';
+        if (!empty($this->attributes)) {
+            foreach ($this->attributes as $k => $v) {
+                $str.= sprintf(' %s="%s"', $k, $v);
+            }
+        }
+        $str.=' />';
+        return $str;
     }
 
-	/* (non-PHPdoc)
-	 * @see Fafoma\Form.Element::validate()
-	 */
-	public function validate() {
-		throw new \Exception("Method not yet implemented.");
-	}
+    /* (non-PHPdoc)
+     * @see Fafoma\Form.Element::validate()
+     */
+    public function validate() {
+        throw new \Exception("Method not yet implemented.");
+    }
 }

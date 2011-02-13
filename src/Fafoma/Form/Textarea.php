@@ -55,36 +55,36 @@ class Textarea extends Element {
         parent::__construct($name, $attributes, $data);
         $this->addFilter(FILTER_SANITIZE_STRING);
     }
-    
+
     /* (non-PHPdoc)
      * @see Fafoma\Form.Element::render()
      */
     public function render(Renderer $renderer) {
-		$str = '<textarea';
-		foreach ($this->attributes as $k => $v) {
-			if ('value' == $k) {
-				continue;
-			}
-			$str.= sprintf(' %s="%s"', $k, $v);
-		}
-		if (!in_array('cols', $this->attributes)) {
-			$str.= ' cols="50"';
-		}
-    	if (!in_array('rows', $this->attributes)) {
-			$str.= ' rows="10"';
-		}
-		$str.= '>';
-		if (array_key_exists('value', $this->attributes)) {
-			$str.= sprintf('%s', $this->attributes['value']);
-		}
-		$str.= '</textarea>';
-		return $str;
+        $str = '<textarea';
+        foreach ($this->attributes as $k => $v) {
+            if ('value' == $k) {
+                continue;
+            }
+            $str.= sprintf(' %s="%s"', $k, $v);
+        }
+        if (!in_array('cols', $this->attributes)) {
+            $str.= ' cols="50"';
+        }
+        if (!in_array('rows', $this->attributes)) {
+            $str.= ' rows="10"';
+        }
+        $str.= '>';
+        if (array_key_exists('value', $this->attributes)) {
+            $str.= sprintf('%s', $this->attributes['value']);
+        }
+        $str.= '</textarea>';
+        return $str;
     }
 
-	/* (non-PHPdoc)
-	 * @see Fafoma\Form.Element::validate()
-	 */
-	public function validate() {
-		throw new \Exception("Method not yet implemented.");
-	}
+    /* (non-PHPdoc)
+     * @see Fafoma\Form.Element::validate()
+     */
+    public function validate() {
+        throw new \Exception("Method not yet implemented.");
+    }
 }

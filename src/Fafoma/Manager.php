@@ -39,7 +39,7 @@ namespace Fafoma;
  *
  */
 class Manager {
-    
+
     /**
      * The form id.
      *
@@ -47,35 +47,35 @@ class Manager {
      */
     protected $id;
 
-	/**
-	 * The form method.
-	 *
-	 * @var string
-	 */
-	protected $method;
-	
-	/**
+    /**
+     * The form method.
+     *
+     * @var string
+     */
+    protected $method;
+
+    /**
      * The form elements.
      *
      * @var Form\Element[]
      */
-	protected $elements = array();
-	
-	/**
-	 * @var string
-	 */
-	protected $action = '';
-	
-	/**
-	 *
-	 * @param string $id
-	 * @param string $method (optional)
-	 */
-	public function __construct($id, $method = 'post') {
+    protected $elements = array();
+
+    /**
+     * @var string
+     */
+    protected $action = '';
+
+    /**
+     *
+     * @param string $id
+     * @param string $method (optional)
+     */
+    public function __construct($id, $method = 'post') {
         $this->id = $id;
-		$this->method = $method;
-	}
-        
+        $this->method = $method;
+    }
+
     /**
      * Add a form element to this manager.
      *
@@ -85,15 +85,15 @@ class Manager {
         $this->elements[] = $element;
     }
 
-	/**
-	 * Get the form elements of this manager.
-	 *
-	 * @return Form\Element[]
-	 */
-	public function getElements() {
-		return $this->elements;
-	}
-        
+    /**
+     * Get the form elements of this manager.
+     *
+     * @return Form\Element[]
+     */
+    public function getElements() {
+        return $this->elements;
+    }
+
     /**
      * Get the id of this form.
      *
@@ -103,7 +103,7 @@ class Manager {
         return $this->id;
     }
 
-	/**
+    /**
      * Get the method of this form.
      *
      * @return string
@@ -112,54 +112,54 @@ class Manager {
         return $this->method;
     }
 
-	/**
-	 * Validate this form.
-	 */
-	public function validate() {
-		foreach ($this->elements as $element) {
-			$element->validate();
-		}
-	}
-	
-	/**
-	 * Export the values of this form.
-	 *
-	 * @return string[]
-	 */
-	public function export() {
-		$data = array();
-		foreach ($this->elements as $element) {
-			$data[$element->getName()] = $element->export();
-		}
-		return $data;
-	}
-	
-	/**
-	 * Bind POST values to this form.
-	 *
-	 * @param array $values
-	 */
-	public function bind(array $values) {
-		foreach ($this->elements as $element) {
-			if (array_key_exists($element->getName(), $values)) {
-				$element->setFilteredValue($values[$element->getName()]);
-			}
-		}
-	}
-	
-	/**
-	 * Set the form action.
-	 *
-	 * @param string $action
-	 */
-	public function setAction($action) {
-		$this->action = $action;
-	}
-	
-	/**
-	 * Get the form action.
-	 */
-	public function getAction() {
-		return $this->action;
-	}
+    /**
+     * Validate this form.
+     */
+    public function validate() {
+        foreach ($this->elements as $element) {
+            $element->validate();
+        }
+    }
+
+    /**
+     * Export the values of this form.
+     *
+     * @return string[]
+     */
+    public function export() {
+        $data = array();
+        foreach ($this->elements as $element) {
+            $data[$element->getName()] = $element->export();
+        }
+        return $data;
+    }
+
+    /**
+     * Bind POST values to this form.
+     *
+     * @param array $values
+     */
+    public function bind(array $values) {
+        foreach ($this->elements as $element) {
+            if (array_key_exists($element->getName(), $values)) {
+                $element->setFilteredValue($values[$element->getName()]);
+            }
+        }
+    }
+
+    /**
+     * Set the form action.
+     *
+     * @param string $action
+     */
+    public function setAction($action) {
+        $this->action = $action;
+    }
+
+    /**
+     * Get the form action.
+     */
+    public function getAction() {
+        return $this->action;
+    }
 }

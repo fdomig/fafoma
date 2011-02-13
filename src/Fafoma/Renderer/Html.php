@@ -42,55 +42,55 @@ namespace Fafoma\Renderer;
  */
 class Html extends Renderer {
 
-	/**
-	 * @var string
-	 */
-	private $form_class = 'form';
+    /**
+     * @var string
+     */
+    private $form_class = 'form';
 
-	/**
-	 * @var string
-	 */
-	private $item_class = 'item';
+    /**
+     * @var string
+     */
+    private $item_class = 'item';
 
-	/**
-	 * @var string
-	 */
-	private $submit_class = 'submit';
+    /**
+     * @var string
+     */
+    private $submit_class = 'submit';
 
-	/**
-	 * Constructor
-	 */
-	public function __construct() {
+    /**
+     * Constructor
+     */
+    public function __construct() {
 
-	}
+    }
 
-	/**
-	 * @param \Fafoma\Manager $manager
-	 * @return string
-	 */
-	public function renderForm(\Fafoma\Manager $manager) {
-		$str = '<form id="'.$manager->getId().'" method="'
-			.$manager->getMethod().'" class="'.$this->form_class.'"'
-			.' action="' . $manager->getAction() . '">';
+    /**
+     * @param \Fafoma\Manager $manager
+     * @return string
+     */
+    public function renderForm(\Fafoma\Manager $manager) {
+        $str = '<form id="'.$manager->getId().'" method="'
+        .$manager->getMethod().'" class="'.$this->form_class.'"'
+        .' action="' . $manager->getAction() . '">';
 
-		$str.= '<fieldset>';
+        $str.= '<fieldset>';
 
-		// elements
-		foreach ($manager->getElements() as $element) {
-			$str.= '<div class="'.$this->item_class.'">';
-			$str.= '<label for="'.$element->getId().'">';
-			$str.= $element->getLabel();
-			$str.= '</label><br />';
-			$str.= $element->render($this);
-			$str.= '</div>';
-		}
+        // elements
+        foreach ($manager->getElements() as $element) {
+            $str.= '<div class="'.$this->item_class.'">';
+            $str.= '<label for="'.$element->getId().'">';
+            $str.= $element->getLabel();
+            $str.= '</label><br />';
+            $str.= $element->render($this);
+            $str.= '</div>';
+        }
 
-		// submit button
-		$str.= '<div class="'.$this->submit_class.'">';
-		$str.= '<input type="submit" value="Submit" /></div>';
+        // submit button
+        $str.= '<div class="'.$this->submit_class.'">';
+        $str.= '<input type="submit" value="Submit" /></div>';
 
-		$str.= '</fieldset>';
-		$str.='</form>';
-		return $str;
-	}
+        $str.= '</fieldset>';
+        $str.='</form>';
+        return $str;
+    }
 }

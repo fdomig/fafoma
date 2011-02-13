@@ -17,12 +17,12 @@ fieldset {
 	background-color: #eee;
 }
 
-.input, .textarea {
+.input,.textarea {
 	border: 1px solid #888;
 	width: 280px;
 }
 
-.input:hover, .textarea:hover {
+.input:hover,.textarea:hover {
 	border-color: black;
 }
 

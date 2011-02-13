@@ -37,32 +37,30 @@
 namespace Fafoma\Tests\Form\Text;
 
 class TextTest extends \PHPUnit_Framework_TestCase {
-	
-	private $text;
-	
-	private $renderer;
-	
-	public function setUp() {
-		$this->text = new \Fafoma\Form\Text('firstname', array(
+
+    private $text;
+
+    private $renderer;
+
+    public function setUp() {
+        $this->text = new \Fafoma\Form\Text('firstname', array(
 			'class' => 'input required',
 			'id' => '4711'
 		));
-		
 		$this->renderer = new \Fafoma\Renderer\Html();
-	}
+    }
 
-	public function testRender() {
-		$this->assertEquals(
+    public function testRender() {
+        $this->assertEquals(
 			'<input type="text" class="input required" id="4711" name="firstname" />',
-			$this->text->render($this->renderer),
-			'->render() returns the input element'
-		);
-	}
-	
-	public function testLabel() {
-		$this->text->setLabel('Firstname');
-		$this->assertEquals('Firstname', $this->text->getLabel(),
+        $this->text->render($this->renderer),
+			'->render() returns the input element');
+    }
+
+    public function testLabel() {
+        $this->text->setLabel('Firstname');
+        $this->assertEquals('Firstname', $this->text->getLabel(),
 		'->getLabel() returns the label');
-	}
-	
+    }
+
 }
