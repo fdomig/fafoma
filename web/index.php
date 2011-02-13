@@ -35,7 +35,7 @@
  */
 
 error_reporting(E_ALL);
-require_once '../src/autoload.php';
+require_once '../autoload.php';
 
 $mngr = new Fafoma\Manager('example');
 
@@ -52,12 +52,6 @@ $description->setLabel('Description');
 $mngr->addElement($description);
 
 $renderer = new Fafoma\Renderer\Html();
-
-if ('POST' === $_SERVER['REQUEST_METHOD']) {
-	$mngr->bind($_POST);
-	var_dump($mngr->export());
-}
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -73,6 +67,11 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 
 <body>
 <h1>Example fafoma form</h1>
-<?php echo $renderer->renderForm($mngr); ?>
+<?php
+	if ('POST' === $_SERVER['REQUEST_METHOD']) {
+		$mngr->bind($_POST);
+	}
+	echo $renderer->renderForm($mngr);
+?>
 </body>
 </html>

@@ -34,7 +34,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Fafoma\Tests\Form;
+namespace Fafoma\Tests\Form\Text;
 
 class TextTest extends \PHPUnit_Framework_TestCase {
 	
@@ -54,13 +54,15 @@ class TextTest extends \PHPUnit_Framework_TestCase {
 	public function testRender() {
 		$this->assertEquals(
 			'<input type="text" class="input required" id="4711" name="firstname" />',
-			$this->text->render($this->renderer)
+			$this->text->render($this->renderer),
+			'->render() returns the input element'
 		);
 	}
 	
 	public function testLabel() {
 		$this->text->setLabel('Firstname');
-		$this->assertEquals('Firstname', $this->text->getLabel());
+		$this->assertEquals('Firstname', $this->text->getLabel(),
+		'->getLabel() returns the label');
 	}
 	
 }
