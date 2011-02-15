@@ -39,6 +39,14 @@ require_once '../autoload.php';
 
 $mngr = new Fafoma\Manager('example');
 
+$salutation = new Fafoma\Form\Select('salutation', array('class' => 'input required'));
+$salutation->addOptions(array(
+    new \Fafoma\Form\Option('Mr.', array(), 'mr'),
+    new \Fafoma\Form\Option('Mrs.', array(), 'mrs')
+));
+$salutation->setLabel('Salutation');
+$mngr->addElement($salutation);
+
 $firstname = new Fafoma\Form\Text('firstname', array('class' => 'input required'));
 $firstname->setLabel('Firstname');
 $mngr->addElement($firstname);

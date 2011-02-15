@@ -36,13 +36,19 @@
 namespace Fafoma\Form;
 
 use \Fafoma\Renderer\Renderer;
+use \Fafoma\Form\Option;
 
 /**
- * Text element class.
+ * Select element class.
  *
  * @author Franziskus Domig
  */
-class Text extends Element {
+class Select extends Element {
+
+    /**
+     * @var Option[]
+     */
+    protected $options = array();
 
     /**
      * Constructor
@@ -53,18 +59,55 @@ class Text extends Element {
      */
     public function __construct($name = null, $attributes = array(), $data = null) {
         parent::__construct($name, $attributes, $data);
-        $this->addFilter(FILTER_SANITIZE_STRING);
+    }
+
+    /**
+     * Add an option to this select element.
+     *
+     * @param \Fafoma\Form\Option $option
+     */
+    public function addOption(Option $option) {
+        $this->options[] = $option;
+    }
+
+    /**
+     * Add an array of options to this select element.
+     *
+     * @param \Fafoma\Form\Option[] $options
+     */
+    public function addOptions(array $options) {
+        foreach ($options as $option) {
+            $this->options[] = $option;
+        }
+    }
+
+    /* (non-PHPdoc)
+     * @see Fafoma\Form.Element::setValue()
+     */
+    public function setValue($value) {
+        foreach ($this->options as $option) {
+            if ($value == $option->getValue()) {
+                $option->select();
+                return;
+            }
+        }
     }
 
     /* (non-PHPdoc)
      * @see Fafoma\Form\Element::render()
      */
     public function render(Renderer $renderer) {
-        $str = '<input type="text"';
+        $str = '<select';
         foreach ($this->attributes as $k => $v) {
             $str.= sprintf(' %s="%s"', $k, $v);
         }
-        $str.=' />';
+        $str.='>';
+
+        foreach ($this->options as $option) {
+            $str.= $option->render($renderer);
+        }
+
+        $str.='</select>';
         return $str;
     }
 

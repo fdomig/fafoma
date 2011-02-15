@@ -33,45 +33,22 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-namespace Fafoma\Form;
 
-use \Fafoma\Renderer\Renderer;
+namespace Fafoma\Tests\Form\Option;
 
-/**
- * Text element class.
- *
- * @author Franziskus Domig
- */
-class Text extends Element {
+use Fafoma\Renderer\Html;
+use \Fafoma\Form\Option;
 
-    /**
-     * Constructor
-     *
-     * @param string $name
-     * @param string[] $attributes
-     * @param mixed[] $data
-     */
-    public function __construct($name = null, $attributes = array(), $data = null) {
-        parent::__construct($name, $attributes, $data);
-        $this->addFilter(FILTER_SANITIZE_STRING);
+class SelectTest extends \PHPUnit_Framework_TestCase {
+
+    private $select;
+    
+    public function setUp() {
+        
+    }
+    
+    public function testSetOption() {
+        
     }
 
-    /* (non-PHPdoc)
-     * @see Fafoma\Form\Element::render()
-     */
-    public function render(Renderer $renderer) {
-        $str = '<input type="text"';
-        foreach ($this->attributes as $k => $v) {
-            $str.= sprintf(' %s="%s"', $k, $v);
-        }
-        $str.=' />';
-        return $str;
-    }
-
-    /* (non-PHPdoc)
-     * @see Fafoma\Form.Element::validate()
-     */
-    public function validate() {
-        throw new \Exception("Method not yet implemented.");
-    }
 }

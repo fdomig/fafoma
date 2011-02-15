@@ -36,6 +36,9 @@
 
 namespace Fafoma\Tests\Form\Text;
 
+use \Fafoma\Form\Text;
+use \Fafoma\Renderer\Html;
+
 class TextTest extends \PHPUnit_Framework_TestCase {
 
     private $text;
@@ -43,11 +46,11 @@ class TextTest extends \PHPUnit_Framework_TestCase {
     private $renderer;
 
     public function setUp() {
-        $this->text = new \Fafoma\Form\Text('firstname', array(
+        $this->text = new Text('firstname', array(
 			'class' => 'input required',
 			'id' => '4711'
 		));
-		$this->renderer = new \Fafoma\Renderer\Html();
+		$this->renderer = new Html();
     }
 
     public function testRender() {

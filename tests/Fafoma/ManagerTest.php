@@ -33,45 +33,38 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-namespace Fafoma\Form;
 
-use \Fafoma\Renderer\Renderer;
+namespace Fafoma\Tests;
 
-/**
- * Text element class.
- *
- * @author Franziskus Domig
- */
-class Text extends Element {
+use Fafoma\Form\Text;
+use Fafoma\Manager;
 
+class ManagerTest extends \PHPUnit_Framework_TestCase {
+
+    private $manager;
+
+    public function setUp() {
+        $this->manager = new Manager('test-form');
+    }
+
+    public function testGetId() {
+        $this->assertEquals('test-form', $this->manager->getId());
+    }
+
+    public function testGetMethod() {
+        $this->assertEquals('post', $this->manager->getMethod());
+    }
+    
+    public function testAddElement() {
+        $element = new Text('test', array());
+        $this->manager->addElement($element);
+        $this->assertEquals(1, count($this->manager->getElements()));
+    }
+    
     /**
-     * Constructor
-     *
-     * @param string $name
-     * @param string[] $attributes
-     * @param mixed[] $data
+     * @depends testAddElement
      */
-    public function __construct($name = null, $attributes = array(), $data = null) {
-        parent::__construct($name, $attributes, $data);
-        $this->addFilter(FILTER_SANITIZE_STRING);
-    }
-
-    /* (non-PHPdoc)
-     * @see Fafoma\Form\Element::render()
-     */
-    public function render(Renderer $renderer) {
-        $str = '<input type="text"';
-        foreach ($this->attributes as $k => $v) {
-            $str.= sprintf(' %s="%s"', $k, $v);
-        }
-        $str.=' />';
-        return $str;
-    }
-
-    /* (non-PHPdoc)
-     * @see Fafoma\Form.Element::validate()
-     */
-    public function validate() {
-        throw new \Exception("Method not yet implemented.");
+    public function testGetElements() {
+        $this->assertContainsOnly('Element', $this->manager->getElements());
     }
 }

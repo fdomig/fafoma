@@ -33,11 +33,87 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+namespace Fafoma\Form;
 
-namespace Fafoma\Tests;
+use \Fafoma\Renderer\Renderer;
 
-use Fafoma\Manager;
+/**
+ * Select element class.
+ *
+ * @author Franziskus Domig
+ */
+class Option {
 
-class ManagerTest extends \PHPUnit_Framework_TestCase {
+    /**
+     * The name of this option.
+     *
+     * @var string
+     */
+    protected $name;
 
+    /**
+     * The attributes of this option
+     *
+     * @var string[]
+     */
+    protected $attributes;
+
+    /**
+     * The value of this option
+     *
+     * @var string
+     */
+    protected $value;
+
+    /**
+     * Constructor
+     *
+     * @param string $name
+     * @param string[] $attributes
+     * @param mixed[] $data
+     */
+    public function __construct($name, $attributes = array(), $value = null) {
+        $this->name = $name;
+        $this->attributes = $attributes;
+        $this->value = $value;
+    }
+
+    /**
+     * Get this options value.
+     *
+     * @return string
+     */
+    public function getValue() {
+        return $this->value;
+    }
+
+    /**
+     * Select this option.
+     */
+    public function select() {
+        $this->attributes['selected'] = 'selected';
+    }
+
+    /**
+     * Unselect this option.
+     */
+    public function unselect() {
+        $this->attributes['selected'] = '';
+    }
+
+
+    /**
+     * Render this option.
+     *
+     * @param \Fafoma\Renderer\Renderer $renderer
+     * @return string
+     */
+    public function render(Renderer $renderer) {
+        $str = sprintf('<option value="%s"', $this->value);
+        foreach ($this->attributes as $k => $v) {
+            $str.= sprintf(' %s="%s"', $k, $v);
+        }
+        $str.=sprintf('>%s</option>', $this->name);
+        return $str;
+    }
 }
